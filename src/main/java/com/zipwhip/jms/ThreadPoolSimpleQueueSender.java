@@ -1,6 +1,6 @@
 package com.zipwhip.jms;
 
-import com.google.common.base.Service;
+import com.google.common.util.concurrent.Service;
 import com.google.common.collect.MapMaker;
 import com.google.common.util.concurrent.AbstractExecutionThreadService;
 import com.google.common.util.concurrent.AbstractIdleService;

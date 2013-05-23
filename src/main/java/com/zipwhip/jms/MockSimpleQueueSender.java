@@ -3,8 +3,6 @@
  */
 package com.zipwhip.jms;
 
-import org.springframework.jms.core.JmsTemplate;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,10 +16,6 @@ public class MockSimpleQueueSender implements SimpleQueueSender {
 	private Map<String, List<Object>> queue = new LinkedHashMap<String, List<Object>>();
 
 	public MockSimpleQueueSender() {
-	}
-
-	public MockSimpleQueueSender(JmsTemplate jmsTemplate) {
-
 	}
 
 	// give us something we're comfortable with
@@ -38,14 +32,6 @@ public class MockSimpleQueueSender implements SimpleQueueSender {
 	@Override
 	public void sendQueueJMSMessage(String queueName, Object message) {
 		saveToken(queueName, message);
-	}
-
-	public JmsTemplate getJmsTemplate() {
-		return null;
-	}
-
-	public void setJmsTemplate(JmsTemplate jmsTemplate) {
-
 	}
 
 	/**
