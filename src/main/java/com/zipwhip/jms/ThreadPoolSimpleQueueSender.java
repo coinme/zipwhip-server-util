@@ -25,14 +25,14 @@ import java.util.concurrent.LinkedBlockingDeque;
  * <p/>
  * Uses a thread pool of connections.
  * <p/>
- * This class has a number of problems with it.
+ * This class has a number of problems with it and is not ready for production.
  * <p/>
  * 1. The sender doesnt know of a problem/exception. This is a problem for retry; we just assume that it's ok. This will
  * cause us to lose tokens in production.
  * <p/>
  * 2. In the event of a broken connection, there is no retry or queueing.
  * <p/>
- * 3. There is no dead detectino; We'll throw requests against a dead connection and lose messages.
+ * 3. There is no dead detection; We'll throw requests against a dead connection and lose messages.
  */
 public class ThreadPoolSimpleQueueSender implements SimpleQueueSender {
 
@@ -119,6 +119,7 @@ public class ThreadPoolSimpleQueueSender implements SimpleQueueSender {
             List<QueueWorker> workers = new ArrayList<QueueWorker>(concurrencyLevel);
             for (int i = 0; i < concurrencyLevel; i++) {
                 ThreadQueueWorker worker = new ThreadQueueWorker(queueName, connection);
+                worker.startAndWait();
                 workers.add(worker);
             }
 
@@ -187,7 +188,6 @@ public class ThreadPoolSimpleQueueSender implements SimpleQueueSender {
 
         public void sendQueueJMSMessage(Object message) throws JMSException {
             try {
-
                 if (isRunning()) {
                     // BLOCKING!
                     queue.put(message);
@@ -220,7 +220,6 @@ public class ThreadPoolSimpleQueueSender implements SimpleQueueSender {
          */
         @Override
         protected void run() throws Exception {
-
             while (isRunning()) {
                 Object message = queue.take();
 

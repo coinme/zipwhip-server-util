@@ -11,6 +11,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * User: Michael
  * Date: 2/13/12
  * Time: 7:59 PM
+ *
+ * This is a demo implementation of the Guava ThreadService. I'm not sure the benefits of this vs the standard Java
+ * Executors.newSingleThreadExecutor().
  */
 public class GenericBufferingService<T> extends AbstractExecutionThreadService {
 

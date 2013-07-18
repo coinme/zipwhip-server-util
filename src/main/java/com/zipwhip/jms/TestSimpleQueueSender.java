@@ -1,5 +1,8 @@
 package com.zipwhip.jms;
 
+import com.zipwhip.util.Directory;
+import com.zipwhip.util.ListDirectory;
+
 import java.util.Map;
 
 /**
@@ -10,17 +13,22 @@ import java.util.Map;
  */
 public class TestSimpleQueueSender implements SimpleQueueSender {
 
+    private final Directory<String, Object> directory = new ListDirectory<String, Object>();
+
     // give us something we're comfortable with
     public void sendQueueJMSMessage(String queueName, String message) {
-        System.out.println("TEST JMS: " + queueName + ":" + message);
+        directory.add(queueName, message);
     }
 
     public void sendQueueJMSMessage(String queueName, Map message) {
-        System.out.println("TEST JMS: " + queueName + ":" + message);
+        directory.add(queueName, message);
     }
 
     public void sendQueueJMSMessage(String queueName, Object message) {
-        System.out.println("TEST JMS: " + queueName + ":" + message);
+        directory.add(queueName, message);
     }
 
+    public Directory<String, Object> getDirectory() {
+        return directory;
+    }
 }

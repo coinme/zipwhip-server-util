@@ -43,7 +43,7 @@
         <dependency>
             <groupId>com.zipwhip</groupId>
             <artifactId>zipwhip-common-util</artifactId>
-            <version>1.62-SNAPSHOT</version>
+            <version>1.62.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
