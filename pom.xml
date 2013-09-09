@@ -17,6 +17,13 @@
     <description>Java utilities for use with servers powered by the Zipwhip Cloud</description>
     <url>http://www.zipwhip.com/</url>
 
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <url>http://hudson.zipwhip.com/artifactory/libs-snapshot-local</url>
+        </repository>
+    </distributionManagement>
+
     <licenses>
         <license>
             <name>MIT License</name>
