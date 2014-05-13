@@ -34,6 +34,10 @@ public class SimpleListenerContainerFactory implements ListenerContainerFactory 
 
         result.setTaskExecutor(QueuedThreadPoolExecutor.newDefaultQueuedThreadPoolExecutor(destinationName, concurrentConsumers, queueDepth));
 
+        // We don't set the properties because we're missing the "MessageListener" field.
+        // The caller should set that and then call "afterPropertiesSet()"
+//        result.afterPropertiesSet();
+
         return result;
     }
 

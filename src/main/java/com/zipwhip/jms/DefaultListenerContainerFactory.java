@@ -18,17 +18,17 @@ import java.util.Map;
  */
 public class DefaultListenerContainerFactory implements ListenerContainerFactory {
 
-    ConnectionFactory connectionFactory;
-    int concurrentConsumers = 1;
-    int defaultMaxConcurrentConsumers = 1;
+    private ConnectionFactory connectionFactory;
+    private int concurrentConsumers = 1;
+    private int defaultMaxConcurrentConsumers = 1;
     //    int idleConsumerLimit = 1;
-    int idleTaskExecutionLimit = 1;
-    int maxMessagesPerTask = -1;
-    int receiveTimeout = 1000;
-    int cacheLevel = 3;
-    PlatformTransactionManager transactionManager;
+    private int idleTaskExecutionLimit = 1;
+    private int maxMessagesPerTask = -1;
+    private int receiveTimeout = 1000;
+    private int cacheLevel = DefaultMessageListenerContainer.CACHE_CONSUMER;
+    private PlatformTransactionManager transactionManager;
 
-    Map<String, Integer> maxConcurrentConsumers;
+    private Map<String, Integer> maxConcurrentConsumers;
 
     @Override
     public AbstractMessageListenerContainer create(String destinationName) {
@@ -117,5 +117,37 @@ public class DefaultListenerContainerFactory implements ListenerContainerFactory
 
     public void setDefaultMaxConcurrentConsumers(int defaultMaxConcurrentConsumers) {
         this.defaultMaxConcurrentConsumers = defaultMaxConcurrentConsumers;
+    }
+
+    public int getCacheLevel() {
+        return cacheLevel;
+    }
+
+    public void setCacheLevel(int cacheLevel) {
+        this.cacheLevel = cacheLevel;
+    }
+
+    public int getIdleTaskExecutionLimit() {
+        return idleTaskExecutionLimit;
+    }
+
+    public void setIdleTaskExecutionLimit(int idleTaskExecutionLimit) {
+        this.idleTaskExecutionLimit = idleTaskExecutionLimit;
+    }
+
+    public int getMaxMessagesPerTask() {
+        return maxMessagesPerTask;
+    }
+
+    public void setMaxMessagesPerTask(int maxMessagesPerTask) {
+        this.maxMessagesPerTask = maxMessagesPerTask;
+    }
+
+    public int getReceiveTimeout() {
+        return receiveTimeout;
+    }
+
+    public void setReceiveTimeout(int receiveTimeout) {
+        this.receiveTimeout = receiveTimeout;
     }
 }
