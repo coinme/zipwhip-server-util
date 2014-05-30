@@ -11,7 +11,7 @@
 
     <groupId>com.zipwhip</groupId>
     <artifactId>zipwhip-server-util</artifactId>
-    <version>1.2.3-SNAPSHOT</version>
+    <version>1.2.4-SNAPSHOT</version>
 
     <name>zipwhip-server-util</name>
     <description>Java utilities for use with servers powered by the Zipwhip Cloud</description>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.zipwhip</groupId>
             <artifactId>zipwhip-common-util</artifactId>
-            <version>1.63.11-SNAPSHOT</version>
+            <version>1.63.12-SNAPSHOT</version>
         </dependency>
 
         <dependency>
