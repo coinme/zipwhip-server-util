@@ -55,6 +55,10 @@ public class DefaultListenerContainerFactory implements ListenerContainerFactory
         result.setBeanName(destinationName);
         result.setTransactionManager(transactionManager);
 
+        if (transactionManager != null) {
+            result.setSessionTransacted(true);
+        }
+
         return result;
     }
 
