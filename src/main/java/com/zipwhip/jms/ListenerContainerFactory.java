@@ -10,7 +10,9 @@ import org.springframework.jms.listener.AbstractMessageListenerContainer;
  * Time: 8:28 PM
  * <p/>
  * Creates listeners for JMS
+ * @deprecated see ListenerContainerFactory2
  */
+@Deprecated
 public interface ListenerContainerFactory {
 
     AbstractMessageListenerContainer create(String destinationName);

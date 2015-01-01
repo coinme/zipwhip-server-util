@@ -2,7 +2,6 @@ package com.zipwhip.jms;
 
 import com.zipwhip.util.CollectionUtil;
 import com.zipwhip.util.ObjectCallback;
-import org.springframework.jms.listener.AbstractMessageListenerContainer;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -11,14 +10,10 @@ import javax.jms.ConnectionFactory;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Michael
- * Date: 4/19/11
- * Time: 8:29 PM
- * @deprecated see DefaultListenerContainerFactory2
+ * @author Michael
+ * @date 1/1/2015
  */
-@Deprecated
-public class DefaultListenerContainerFactory implements ListenerContainerFactory {
+public class DefaultListenerContainerFactory2 implements ListenerContainerFactory2 {
 
     private ConnectionFactory connectionFactory;
     private int concurrentConsumers = 1;
@@ -33,7 +28,7 @@ public class DefaultListenerContainerFactory implements ListenerContainerFactory
     private Map<String, Integer> maxConcurrentConsumers;
 
     @Override
-    public AbstractMessageListenerContainer create(String destinationName) {
+    public JmsLifecycleContainer create(String destinationName, ObjectCallback callback) {
         DefaultMessageListenerContainer result = new DefaultMessageListenerContainer();
 
         if (CollectionUtil.exists(maxConcurrentConsumers)) {
@@ -61,20 +56,11 @@ public class DefaultListenerContainerFactory implements ListenerContainerFactory
             result.setSessionTransacted(true);
         }
 
-        return result;
-    }
+        result.setMessageListener(new MessageListenerAdapter(callback));
 
-    @Override
-    public AbstractMessageListenerContainer create(String destinationName, ObjectCallback callback) {
-        AbstractMessageListenerContainer listenerContainer = create(destinationName);
+        result.afterPropertiesSet();
 
-        final MessageListenerAdapter adapter = new MessageListenerAdapter(callback);
-
-        listenerContainer.setMessageListener(adapter);
-
-        listenerContainer.afterPropertiesSet();
-
-        return listenerContainer;
+        return new SingleJmsLifecycleContainerAdapter(result);
     }
 
     public ConnectionFactory getConnectionFactory() {
